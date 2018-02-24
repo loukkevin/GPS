@@ -14,7 +14,7 @@ class App extends Component {
       submitted: false,
       electivesChosen: false,
       url: '',
-      api: 'https://morning-temple-78184.herokuapp.com/' //{/*'http://localhost:8080/parse?darsURL='*/}
+      api: 'https://morning-temple-78184.herokuapp.com/parse?darsUrl=' //{/*'http://localhost:8080/parse?darsURL='*/}
   }
 this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
