@@ -24,7 +24,8 @@ class Course extends Component{
                   .then( (response) => {
                       return response.json() })
                           .then( (json) => {
-                              this.setState({prerequisites: json.prerequisites, credits: json.credits,  description: json.description, semestersOffered: json.semestersOffered, isToggleOn: !prevState.isToggleOn});
+                            let prevState = this.state.isToggleOn,
+                              this.setState({prerequisites: json.prerequisites, credits: json.credits,  description: json.description, semestersOffered: json.semestersOffered, isToggleOn: !prevState});
                           });
       if (this.state.isToggleOn){
         this.props.selectCourseHandler(this.state.credits,false);
