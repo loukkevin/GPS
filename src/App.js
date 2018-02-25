@@ -30,13 +30,20 @@ this.handleSubmit = this.handleSubmit.bind(this);
     event.preventDefault();
     let url = encodeURIComponent(this.state.url)
     let api = this.state.api
-        fetch(api + url)
-            .then( (response) => {
-                return response.json() })
-                    .then( (json) => {
-                        this.setState({requirements: json.requirements, electives: json.electives, submitted: true});
-                    });
-    };
+
+    Promise.race([
+fetch(api + url),
+  new Promise((_, reject) =>
+    setTimeout(() => reject(new Error('Timeout')), 7000)
+  ).then( (response) => {
+      return response.json() })
+          .then( (json) => {
+              this.setState({requirements: json.requirements, electives: json.electives, submitted: true});
+          });
+      ]);
+
+  };
+
   render() {
 
 
