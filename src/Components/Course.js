@@ -16,16 +16,15 @@ class Course extends Component{
     }
 
     handleClick() {
-  //    this.setState(prevState => ({
-  //      isToggleOn: !prevState.isToggleOn
-  //    }));
+      this.setState(prevState => ({
+        isToggleOn: !prevState.isToggleOn
+      }));
           let api = 'https://morning-temple-78184.herokuapp.com/getCourseInformation?name='
               fetch(api + this.state.name)
                   .then( (response) => {
                       return response.json() })
                           .then( (json) => {
-                            let prevState = this.state.isToggleOn
-                            this.setState({prerequisites: json.prerequisites, credits: json.credits,  description: json.description, semestersOffered: json.semestersOffered, isToggleOn: !{prevState}});
+                              this.setState({prerequisites: json.prerequisites, credits: json.credits,  description: json.description, semestersOffered: json.semestersOffered});
                           });
       if (this.state.isToggleOn){
         this.props.selectCourseHandler(this.state.credits,false);
