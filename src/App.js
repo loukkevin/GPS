@@ -39,7 +39,7 @@ fetch(api + url),
       return response.json() })
           .then( (json) => {
               this.setState({requirements: json.requirements, electives: json.electives, submitted: true});
-          });
+          })
       ]);
 
   };
