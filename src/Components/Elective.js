@@ -63,8 +63,6 @@ class Elective extends Component{
     let numCourses = this.state.numCourses
     let type = this.state.electiveType
 
-
-
 const fulfilledStyle = {
   border: '2px solid black',
   backgroundColor: '#4dff4d',
@@ -88,10 +86,9 @@ const fulfilledStyle = {
       {courses.map(course => <td><Course key= {course.name}
     selectCourseHandler = {this.selectCourseHandler}
       name={course.name}
-      prerequisites={addprerequisites}
-      credits={addcredits}
-      description={adddescription}
-      semestersOffered={addsemestersOffered}
+      prerequisites={course.prerequisites}
+      credits={course.credits}
+      description={course.description}
       status="unselected" /></td>)}
       </tr>
       <tr>
@@ -114,16 +111,7 @@ else {
   const rowStyle = {
     width: '75%'
   }
-    for (var index = 0; index < courses.length; index++){
-      console.log(courses[index]);
-      let api = 'https://morning-temple-78184.herokuapp.com/getCourseInformation?name='
-          fetch(api + courses[index].name)
-              .then( (response) => {
-                  return response.json() })
-                      .then( (json) => {
-                          let addprerequisites: json.prerequisites; let addcredits: json.credits;  let adddescription: json.description; let addsemestersOffered: json.semestersOffered;
-                      });
-    }
+
   return(
 <div style={electiveStyle}>
 <table>
@@ -132,10 +120,9 @@ else {
   {courses.map(course => <td><Course key= {course.name}
 selectCourseHandler = {this.selectCourseHandler}
   name={course.name}
-  prerequisites={addprerequisites}
-  credits={addcredits}
-  description={adddescription}
-  semestersOffered={addsemestersOffered}
+  prerequisites={course.prerequisites}
+  credits={course.credits}
+  description={course.description}
   status="unselected" /></td>)}
   </tr>
   <tr>

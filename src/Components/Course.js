@@ -11,18 +11,17 @@ class Course extends Component{
         semestersOffered: [],
         isToggleOn: false
       }
-
+      let api = 'https://morning-temple-78184.herokuapp.com/getCourseInformation?name='
+          fetch(api + this.state.name)
+              .then( (response) => {
+                  return response.json() })
+                     .then( (json) => {
+                          this.setState({prerequisites: json.prerequisites, credits: json.credits,  description: json.description, semestersOffered: json.semestersOffered});
+                      });
       this.handleClick = this.handleClick.bind(this);
     }
 
     handleClick() {
-      //let api = 'https://morning-temple-78184.herokuapp.com/getCourseInformation?name='
-        //  fetch(api + this.state.name)
-          //    .then( (response) => {
-            //      return response.json() })
-              //        .then( (json) => {
-                //          this.setState({prerequisites: json.prerequisites, credits: json.credits,  description: json.description, semestersOffered: json.semestersOffered});
-                //      });
       this.setState(prevState => ({
         isToggleOn: !prevState.isToggleOn
       }));
