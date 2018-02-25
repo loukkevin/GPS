@@ -34,7 +34,7 @@ this.handleSubmit = this.handleSubmit.bind(this);
     Promise.race([
 fetch(api + url),
   new Promise((_, reject) =>
-    setTimeout(() => reject(new Error('Timeout')), 7000)
+    setTimeout(() => reject(new Error('Timeout')), 120000)
   ).then( (response) => {
       return response.json() })
           .then( (json) => {
