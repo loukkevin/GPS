@@ -70,7 +70,7 @@ class Elective extends Component{
               .then( (response) => {
                   return response.json() })
                       .then( (json) => {
-                          let addprerequisites: json.prerequisites, let addcredits: json.credits,  let adddescription: json.description, let addsemestersOffered: json.semestersOffered
+                          let addprerequisites: json.prerequisites; let addcredits: json.credits;  let adddescription: json.description; let addsemestersOffered: json.semestersOffered;
                       });
     }
 
