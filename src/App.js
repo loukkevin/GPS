@@ -34,7 +34,7 @@ this.handleSubmit = this.handleSubmit.bind(this);
             .then( (response) => {
                 return response.json() })
                     .then( (json) => {
-                        this.setState({requirements: json.requirements, electives: json.electives, submitted: true});//, electives: json.electives
+                        this.setState({requirements: json.requirements, electives: json.electives, submitted: true});
                     });
     };
   render() {
