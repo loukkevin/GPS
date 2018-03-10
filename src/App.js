@@ -40,7 +40,7 @@ this.handleSubmit = this.handleSubmit.bind(this);
   render() {
 
 
-    if (this.state.submitted){
+    if (this.state.submitted && this.state.electives.length>0){
     console.log(this.state.requirements)
     console.log(this.state.electives)
     let requirements = this.state.requirements
