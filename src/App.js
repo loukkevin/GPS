@@ -109,7 +109,6 @@ this.handleSubmit = this.handleSubmit.bind(this);
       </form>
       <div style={spacerStyle}></div>
       </div>
-      <Semester />
       </div>
     );
   }
