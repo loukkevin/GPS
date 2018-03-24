@@ -11,7 +11,7 @@ class Course extends Component{
         semestersOffered: [],
         isToggleOn: false
       }
-      let api = 'https://morning-temple-78184.herokuapp.com/getCourseInformation?name='
+      let api = 'https://scsu-gps-server.herokuapp.com/parse?darsURL='
           fetch(api + this.state.name)
               .then( (response) => {
                   return response.json() })

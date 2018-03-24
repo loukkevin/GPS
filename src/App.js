@@ -14,7 +14,7 @@ class App extends Component {
       submitted: false,
       electivesChosen: false,
       url: '',
-      api: 'https://morning-temple-78184.herokuapp.com/parse?darsURL='
+      api: 'https://scsu-gps-server.herokuapp.com/parse?darsURL='
   }
 this.handleChange = this.handleChange.bind(this);
 this.handleSubmit = this.handleSubmit.bind(this);
@@ -109,6 +109,7 @@ this.handleSubmit = this.handleSubmit.bind(this);
       </form>
       <div style={spacerStyle}></div>
       </div>
+      <Semester />
       </div>
     );
   }
