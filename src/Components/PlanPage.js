@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Course from './Course';
+import Plan from './Plan';
 
 class PlanPage extends Component {
   constructor(){
@@ -63,7 +64,7 @@ class PlanPage extends Component {
              Chosen Electives go here
           </td>
           <td style={planDivStyle}>
-          Planning table goes here
+            <Plan />
           </td>
         </tr>
         </table>

@@ -83,13 +83,13 @@ const fulfilledStyle = {
     <table>
     <tbody>
     <tr className = "electiveRow" style={styles.electiveRowStyle}>
-      {courses.map(course => <td><Course key= {course.name}
+      {courses.map(course => <Course key= {course.name}
     selectCourseHandler = {this.selectCourseHandler}
       name={course.name}
       prerequisites={course.prerequisites}
       credits={course.credits}
       description={course.description}
-      status="unselected" /></td>)}
+      status="unselected" />)}
       </tr>
       <tr>
       <td>Credits: {this.state.numCredits}</td>

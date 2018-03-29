@@ -37,22 +37,29 @@ this.handleSubmit = this.handleSubmit.bind(this);
                         this.setState({requirements: json.requirements, electives: json.electives, submitted: true});
                     });
     };
+    // render(){
+    //   return(
+    //   <div>
+    //     <PlanPage />
+    //   </div>
+    // );
+    // }
   render() {
-
-
+  
+  
     if (this.state.submitted && this.state.electives !== undefined && this.state.electives.length > 0){
     console.log(this.state.requirements)
     console.log(this.state.electives)
     let requirements = this.state.requirements
     let electives = this.state.electives
-
+  
     const appStyle = {
       width: '99%',
       border: '2px solid black',
       margin: 'auto',
       padding: '5px'
     }
-
+  
     const dividerStyle = {
       height: '5px'
     }
@@ -81,7 +88,7 @@ this.handleSubmit = this.handleSubmit.bind(this);
       margin: 'auto',
       textAlign: 'left'
     }
-
+  
     const spacerStyle = {
       height: '40px'
     }
