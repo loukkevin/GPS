@@ -8,6 +8,12 @@ class ElectiveCourses extends Component {
     this.state = {
       electiveCourses: this.props.electiveCourses
     };
+    this.selectedCourseHandler = this.selectedCourseHandler.bind(this);
+  }
+
+  selectedCourseHandler(course,isSelected){
+    var fromElectives = true;
+    this.props.handleSelectedCourse(course,fromElectives);
   }
 
   render() {
@@ -15,7 +21,7 @@ class ElectiveCourses extends Component {
 
 
     return (
-      <table style = {{border: "3px solid black",
+      <table style = {{border: "1px solid black",
       alignContent: "center",
       height: "inherit",
       }}>
@@ -27,7 +33,7 @@ class ElectiveCourses extends Component {
           {courses.map(course => (
             <tr><Course
               disabled={false}
-              selectCourseHandler={this.selectCourseHandler}
+              selectCourseHandler={this.selectedCourseHandler}
               key={course.name}
               name={course.name}
               prerequisites={course.prerequisites}

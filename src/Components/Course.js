@@ -51,9 +51,9 @@ class Course extends Component {
       isToggleOn: !prevState.isToggleOn
     }));
     if (this.state.isToggleOn) {
-      this.props.selectCourseHandler(this.state.credits, false);
+      this.props.selectCourseHandler(this, false);
     } else {
-      this.props.selectCourseHandler(this.state.credits, true);
+      this.props.selectCourseHandler(this, true);
     }
   }
 

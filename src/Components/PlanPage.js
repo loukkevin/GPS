@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Course from "./Course";
 import Plan from "./Plan";
 import ElectiveCourses from "./ElectiveCourses";
+import InfoPanel from "./InfoPanel";
 
 class PlanPage extends Component {
   constructor(props) {
@@ -12,8 +13,11 @@ class PlanPage extends Component {
         { requiredCourse: "SE 245" }
       ],
       electiveCourses: [],
-      requiredCourses: []
+      requiredCourses: [],
+      selectedCourse: {},
+      courseIsSelected: false
     };
+    this.handleSelectedCourse = this.handleSelectedCourse.bind(this);
   }
 
   componentWillMount() {
@@ -33,6 +37,10 @@ class PlanPage extends Component {
     this.setState({ requiredCourses: requiredCourses });
   }
 
+  handleSelectedCourse({ course }, fromElectives) {
+    this.setState({selectedCourse: {course}});
+  }
+  
   render() {
     let requiredCourses = this.state.requiredCourses;
     const planPageStyle = {
@@ -86,32 +94,38 @@ class PlanPage extends Component {
     return (
       <div className="PlanPage" style={planPageStyle}>
         <table style={upperSectionDivStyle}>
-        <tbody>
-          <tr style={tableRowStyle}>
-            <td style={{ height: "inherit" }}>
-              <ElectiveCourses
-                electiveCourses={[
-                  { name: "SE412", credits: 3 },
-                  { name: "SE476", credits: 3 },
-                  { name: "SE477", credits: 3 },
-                  { name: "SE478", credits: 3 },
-                  { name: "SE479", credits: 3 },
-                  { name: "SE480", credits: 3 }
-                ]}
-              />
-            </td>
-            <td style={planDivStyle}>
-              <Plan />
-            </td>
-          </tr>
+          <tbody style={upperSectionDivStyle}>
+            <tr style={tableRowStyle}>
+              <td style={electiveCoursesDivStyle}>
+                <ElectiveCourses
+                  handleSelectedCourse={this.handleSelectedCourse}
+                  electiveCourses={[
+                    { name: "SE412", credits: 3 },
+                    { name: "SE476", credits: 3 },
+                    { name: "SE477", credits: 3 },
+                    { name: "SE478", credits: 3 },
+                    { name: "SE479", credits: 3 },
+                    { name: "SE480", credits: 3 }
+                  ]}
+                />
+              </td>
+              <td style={planDivStyle}>
+                <Plan />
+              </td>
+            </tr>
           </tbody>
         </table>
         <table style={lowerSectionDivStyle}>
-        <tbody>
-          <tr>
-            <td style={infoPanelStyle}> INFO PANEL</td>
-            <td style={optionPanelStyle}>OPTIONS PANEL</td>
-          </tr>
+          <tbody>
+            <tr>
+              <InfoPanel
+                course={this.state.selectedCourse
+                }
+                style={infoPanelStyle}
+                selected = {this.state.courseIsSelected}
+              />
+              <td style={optionPanelStyle}>OPTIONS PANEL</td>
+            </tr>
           </tbody>
         </table>
       </div>
