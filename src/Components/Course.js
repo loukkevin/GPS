@@ -1,4 +1,19 @@
 import React, { Component } from "react";
+import Draggable from "react-draggable";
+import { DragSource } from "react-dnd";
+
+const courseSource = {
+  beginDrag(props) {
+    return {};
+  }
+};
+
+function collect(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  };
+}
 
 class Course extends Component {
   constructor(props) {
@@ -11,20 +26,24 @@ class Course extends Component {
       semestersOffered: [],
       isToggleOn: false
     };
-    let api = "https://scsu-gps-server.herokuapp.com/getCourseInformation?name=";
-    fetch(api + this.state.name)
-      .then(response => {
-        return response.json();
-      })
-      .then(json => {
-        this.setState({
-          prerequisites: json.prerequisites,
-          credits: json.credits,
-          description: json.description,
-          semestersOffered: json.semestersOffered
-        });
-      });
+    // let api =
+    //   "https://scsu-gps-server.herokuapp.com/getCourseInformation?name= ";
+    // fetch(api + this.state.name)
+    //   .then(response => {
+    //     return response.json();
+    //   })
+    //   .then(json => {
+    //     this.setState({
+    //       prerequisites: json.prerequisites,
+    //       credits: json.credits,
+    //       description: json.description,
+    //       semestersOffered: json.semestersOffered
+    //     });
+    //   });
     this.handleClick = this.handleClick.bind(this);
+    this.handleStart = this.handleStart.bind(this);
+    this.handleDrag = this.handleDrag.bind(this);
+    this.handleDrop = this.handleDrop.bind(this);
   }
 
   handleClick() {
@@ -41,6 +60,13 @@ class Course extends Component {
   isSelected() {
     return this.state.isToggleOn;
   }
+
+  handleDrag() {}
+
+  handleDrop() {}
+
+  handleStart() {}
+
   render() {
     let selected = this.state.isToggleOn;
 
@@ -54,14 +80,20 @@ class Course extends Component {
         fontSize: "16px",
         border: "1px solid black",
         width: "103px",
+        height: "50px",
         fontWeight: "bold"
       };
       return (
-        <div>
+        <Draggable
+          disabled={this.props.disabled}
+          onStart={this.handleStart}
+          onDrag={this.handleDrag}
+          onStop={this.handleDrop}
+        >
           <button onClick={this.handleClick} style={style}>
             {this.state.name}
           </button>
-        </div>
+        </Draggable>
       );
     } else {
       const style = {
@@ -72,10 +104,30 @@ class Course extends Component {
         display: "inline-block",
         fontSize: "16px",
         width: "103px",
-        fontWeight: "bold"
+        height: "50px",
+        fontWeight: "bold",
+        border: "1px solid black"
       };
-      return (
-        <td>
+      //     return (
+      //       <Draggable disabled={this.props.disabled}>
+      //         <button onClick={this.handleClick} style={style}>
+      //           {this.state.name}
+      //         </button>
+      //       </Draggable>
+      //     );
+      const { connectDragSource, isDragging } = this.props;
+      return connectDragSource(
+        <td
+          style={{
+            opacity: isDragging ? 0.5 : 1,
+            fontSize: 25,
+            fontWeight: "bold",
+            cursor: "move",
+            width: "103px",
+            height: "50px",
+            textAlign: "center"
+          }}
+        >
           <button onClick={this.handleClick} style={style}>
             {this.state.name}
           </button>
@@ -85,4 +137,4 @@ class Course extends Component {
   }
 }
 
-export default Course;
+export default DragSource("course", courseSource, collect)(Course);
