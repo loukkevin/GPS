@@ -19,8 +19,8 @@ td, th {
     padding: 10px;
   }
   
-  .sturdy td:nth-child(1),
-  .sturdy td:nth-child(3) {
+  .sturdy td:first-child,
+  .sturdy td:last-child {
     width: 10%;
     text-align: center;
   }

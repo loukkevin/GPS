@@ -6,9 +6,17 @@ class InfoPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      course: this.props.course,
+      name: this.props.name,
+      credits: this.props.credits,
+      prerequisites: this.props.prerequisites,
+      semestersOffered: this.props.semestersOffered,
+      description: this.props.description,
       selected: this.props.selected
     };
+  }
+  componentWillReceiveProps() {
+    this.setState({ course: this.props.course, selected: this.props.selected });
+    console.log("infopanel component will receive props" + this.props.name);
   }
 
   render() {
@@ -21,27 +29,25 @@ class InfoPanel extends Component {
         <table style={style}>
           <tbody>
             <tr>
-              <td>Name: {this.state.course.name}</td>
+              <td>Name: {this.state.name}</td>
             </tr>
             <tr>
-              <td>Prerequisites: {this.state.course.prerequisites}</td>
+              <td>Prerequisites: {this.state.prerequisites}</td>
             </tr>
             <tr>
-              <td>Credits: {this.state.course.credits}</td>
+              <td>Credits: {this.state.credits}</td>
             </tr>
             <tr>
-              <td>Semesters Offered: {this.state.course.semestersOffered}</td>
+              <td>Semesters Offered: {this.state.semestersOffered}</td>
             </tr>
             <tr>
-              <td>Description: {this.state.course.description}</td>
+              <td>Description: {this.state.description}</td>
             </tr>
           </tbody>
         </table>
       );
-    }else{
-      return (
-        <div></div>
-      );
+    } else {
+      return <td>Remember to confirm your plan with your advisor</td>;
     }
   }
 }

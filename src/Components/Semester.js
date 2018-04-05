@@ -3,19 +3,6 @@ import Course from "./Course";
 //import styles from "./Semester.css";
 //import Draggable from "react-draggable";
 
-// const squareTarget = {
-//   drop(props) {
-//     moveCourse(props.x, props.y);
-//   }
-// };
-
-function collect(connect, monitor) {
-  return {
-    connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver()
-  };
-}
-
 class Semester extends Component {
   constructor(props) {
     super(props);
@@ -73,11 +60,12 @@ class Semester extends Component {
   }
 
   render() {
+    const style = {border: "1px dotted black",
+      textAlign: "left"}
     let courses = this.state.courses;
     return (
-      <tr>
+      <tr style = {style}> 
         <td>{this.state.name}</td>
-        <td>
           {courses.map(course => (
             <Course
               disabled={false}
@@ -90,7 +78,6 @@ class Semester extends Component {
               status="unselected"
             />
           ))}
-        </td>
         <td>{this.state.credits}</td>
       </tr>
     );

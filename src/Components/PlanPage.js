@@ -14,16 +14,20 @@ class PlanPage extends Component {
       ],
       electiveCourses: [],
       requiredCourses: [],
-      selectedCourse: {},
+      selectedCourseName: "name",
+      selectedCourseDescription: "description",
+      selectedCoursePrerequisites: [],
+      selectedCourseSemestersOffered: [],
+      selectedCourseCredits: 0,
       courseIsSelected: false
     };
-    this.handleSelectedCourse = this.handleSelectedCourse.bind(this);
   }
 
   componentWillMount() {
     this.setState({ requirements: this.props.requirements });
     this.setState({ electiveCourses: this.props.electiveCourses });
     this.getRequirementCourses();
+    this.handleSelectedCourse = this.handleSelectedCourse.bind(this);
   }
 
   getRequirementCourses() {
@@ -32,15 +36,25 @@ class PlanPage extends Component {
     requirements = this.state.requirements;
     for (var i = 0; i < requirements.length; i++) {
       requiredCourses.push(requirements[i].requiredCourse);
-      console.log(requirements[i].requiredCourse);
+      console.log(requirements[i].requiredCourse + " ");
     }
     this.setState({ requiredCourses: requiredCourses });
   }
 
-  handleSelectedCourse({ course }, fromElectives) {
-    this.setState({selectedCourse: {course}});
+  handleSelectedCourse(course, fromElectives) {
+    this.setState(prevState => ({
+      courseIsSelected: !prevState.courseIsSelected
+    }));
+    this.setState({
+      selectedCourseName: course.name,
+      selectedCourseDescription: course.description,
+      selectedCourseCredits: course.credits,
+      selectedCoursePrerequisites: course.prerequisites,
+      selectedCourseSemestersOffered: course.semestersOffered
+    });
+    console.log("in plan page course handler" + course.state.name);
   }
-  
+
   render() {
     let requiredCourses = this.state.requiredCourses;
     const planPageStyle = {
@@ -100,17 +114,17 @@ class PlanPage extends Component {
                 <ElectiveCourses
                   handleSelectedCourse={this.handleSelectedCourse}
                   electiveCourses={[
-                    { name: "SE412", credits: 3 },
-                    { name: "SE476", credits: 3 },
-                    { name: "SE477", credits: 3 },
-                    { name: "SE478", credits: 3 },
-                    { name: "SE479", credits: 3 },
-                    { name: "SE480", credits: 3 }
+                    { key: "SE412", name: "SE412", credits: 3 },
+                    { key: "SE476", name: "SE476", credits: 3 },
+                    { key: "SE477", name: "SE477", credits: 3 },
+                    { key: "SE478", name: "SE478", credits: 3 },
+                    { key: "SE479", name: "SE479", credits: 3 },
+                    { key: "SE480", name: "SE480", credits: 3 }
                   ]}
                 />
               </td>
               <td style={planDivStyle}>
-                <Plan />
+                <Plan requiredCourses={this.state.requiredCourses} />
               </td>
             </tr>
           </tbody>
@@ -118,12 +132,18 @@ class PlanPage extends Component {
         <table style={lowerSectionDivStyle}>
           <tbody>
             <tr>
-              <InfoPanel
-                course={this.state.selectedCourse
-                }
-                style={infoPanelStyle}
-                selected = {this.state.courseIsSelected}
-              />
+              <td>
+                <InfoPanel
+                  name={this.state.selectedCourseName}
+                  prerequisites={this.state.selectedCoursePrerequisites}
+                  credits={this.state.selectedCourseCredits}
+                  semestersOffered={this.state.selectedCourseSemestersOffered}
+                  description={this.state.selectedCourseDescription}
+                  style={infoPanelStyle}
+                  selected={this.state.courseIsSelected}
+                />
+              </td>
+
               <td style={optionPanelStyle}>OPTIONS PANEL</td>
             </tr>
           </tbody>
