@@ -6,11 +6,17 @@ class Course extends Component {
     this.state = {
       name: this.props.name,
       prerequisites: [],
-      credits: this.props.credits,
+      credits: 0,
       description: this.props.name,
       semestersOffered: [],
       isToggleOn: false
     };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidMount(){
+        
     let api = "http://localhost:8080/getCourseInformation?name="; //"https://scsu-gps-server.herokuapp.com/getCourseInformation?name= ";
     fetch(api + this.state.name)
       .then(response => {
@@ -24,20 +30,16 @@ class Course extends Component {
           semestersOffered: json.semestersOffered
         });
       });
-    this.handleClick = this.handleClick.bind(this);
-    this.handleStart = this.handleStart.bind(this);
-    this.handleDrag = this.handleDrag.bind(this);
-    this.handleDrop = this.handleDrop.bind(this);
   }
 
   handleClick() {
     this.setState(prevState => ({
       isToggleOn: !prevState.isToggleOn
     }));
-    if (this.state.isToggleOn) {
-      this.props.selectCourseHandler(this, false);
-    } else {
+    if (this.isSelected()) {
       this.props.selectCourseHandler(this, true);
+    } else {
+      this.props.selectCourseHandler(this, false);
     }
   }
 
@@ -45,18 +47,12 @@ class Course extends Component {
     return this.state.isToggleOn;
   }
 
-  handleDrag() {}
-
-  handleDrop() {}
-
-  handleStart() {}
-
   render() {
     let selected = this.state.isToggleOn;
 
     if (selected) {
       const style = {
-        backgroundColor: "#4CAF50",
+        backgroundColor: "green",
         color: "white",
         textAlign: "center",
         textDecoration: "none",

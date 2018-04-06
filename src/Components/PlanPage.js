@@ -42,17 +42,18 @@ class PlanPage extends Component {
   }
 
   handleSelectedCourse(course, fromElectives) {
+    this.setState({
+      selectedCourseName: course.state.name,
+      selectedCourseDescription: course.state.description,
+      selectedCourseCredits: course.state.credits,
+      selectedCoursePrerequisites: course.state.prerequisites,
+      selectedCourseSemestersOffered: course.state.semestersOffered
+    });
     this.setState(prevState => ({
       courseIsSelected: !prevState.courseIsSelected
     }));
-    this.setState({
-      selectedCourseName: course.name,
-      selectedCourseDescription: course.description,
-      selectedCourseCredits: course.credits,
-      selectedCoursePrerequisites: course.prerequisites,
-      selectedCourseSemestersOffered: course.semestersOffered
-    });
-    console.log("in plan page course handler" + course.state.name);
+
+    console.log("in plan page course handler" + this.state.courseIsSelected);
   }
 
   render() {
@@ -124,7 +125,9 @@ class PlanPage extends Component {
                 />
               </td>
               <td style={planDivStyle}>
-                <Plan requiredCourses={this.state.requiredCourses} />
+                <Plan requiredCourses={this.state.requiredCourses}
+                handleSelectedCourse = {this.handleSelectedCourse}
+                courseIsSelected = {this.state.courseIsSelected} />
               </td>
             </tr>
           </tbody>

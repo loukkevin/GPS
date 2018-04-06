@@ -35,16 +35,11 @@ class ElectiveCourses extends Component {
         </thead>
         <tbody>
           {courses.map(course => (
-            <tr>
+            <tr key={course.name}>
               <Course
-                disabled={false}
                 selectCourseHandler={this.selectedCourseHandler}
                 key={course.name}
                 name={course.name}
-                prerequisites={course.prerequisites}
-                credits={course.credits}
-                description={course.description}
-                status="unselected"
               />
             </tr>
           ))}

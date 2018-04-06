@@ -14,9 +14,24 @@ class InfoPanel extends Component {
       selected: this.props.selected
     };
   }
-  componentWillReceiveProps() {
-    this.setState({ course: this.props.course, selected: this.props.selected });
+  componentDidUpdate() {
+    this.updateState();
     console.log("infopanel component will receive props" + this.props.name);
+  }
+
+  updateState() {
+    if (this.props.name == this.state.name) {
+      console.log("updateState()");
+    } else {
+      this.setState({
+        name: this.props.name,
+        credits: this.props.credits,
+        prerequisites: this.props.prerequisites,
+        semestersOffered: this.props.semestersOffered,
+        description: this.props.description,
+        selected: this.props.selected
+      });
+    }
   }
 
   render() {
@@ -47,7 +62,7 @@ class InfoPanel extends Component {
         </table>
       );
     } else {
-      return <td>Remember to confirm your plan with your advisor</td>;
+      return <table><tbody><tr><td>Remember to confirm your plan with your advisor</td></tr></tbody></table>;
     }
   }
 }

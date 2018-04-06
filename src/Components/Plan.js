@@ -76,6 +76,13 @@ class Plan extends Component {
       requirements: [],
       electiveCourses: []
     };
+    this.selectedCourseHandler = this.selectedCourseHandler.bind(this);
+  }
+
+  selectedCourseHandler(course, isSelected) {
+    var fromElectives = false;
+    console.log("in planCourse handler" + course.state.name);
+    this.props.handleSelectedCourse(course, fromElectives);
   }
 
   render() {
@@ -105,6 +112,8 @@ class Plan extends Component {
               name={semester.name}
               credits={semester.credits}
               courses={semester.courses}
+              selectedCourseHandler={this.selectedCourseHandler}
+              courseIsSelected={this.props.courseIsSelected}
             />
           ))}
         </tbody>
