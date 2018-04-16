@@ -19,7 +19,8 @@ class PlanPage extends Component {
       selectedCoursePrerequisites: [],
       selectedCourseSemestersOffered: [],
       selectedCourseCredits: 0,
-      courseIsSelected: false
+      courseIsSelected: false,
+      courseAdded: false
     };
   }
 
@@ -28,6 +29,9 @@ class PlanPage extends Component {
     this.setState({ electiveCourses: this.props.electiveCourses });
     this.getRequirementCourses();
     this.handleSelectedCourse = this.handleSelectedCourse.bind(this);
+    this.courseAdded = this.courseAdded.bind(this);
+    this.courseAddedCallback = this.courseAddedCallback.bind(this);
+    this.addCourse = this.addCourse.bind(this);
   }
 
   getRequirementCourses() {
@@ -39,6 +43,10 @@ class PlanPage extends Component {
       console.log(requirements[i].requiredCourse + " ");
     }
     this.setState({ requiredCourses: requiredCourses });
+  }
+
+  addCourse(){
+    return this.state.selectedCourseName;
   }
 
   handleSelectedCourse(course, fromElectives) {
@@ -54,6 +62,17 @@ class PlanPage extends Component {
     }));
 
     console.log("in plan page course handler" + this.state.courseIsSelected);
+  }
+
+  courseAdded(){
+    this.setState(prevState => ({
+      courseIsSelected: !prevState.courseIsSelected,
+      courseAdded: true
+    }));
+  }
+
+  courseAddedCallback(){
+    this.setState({courseAdded: false})
   }
 
   render() {
@@ -77,14 +96,14 @@ class PlanPage extends Component {
       overflow: "auto"
     };
     const electiveCoursesDivStyle = {
-      height: "inherit",
-      width: "10%",
-      scroll: "auto",
-      border: "1px solid black"
+      height: "20%",
+      width: "12%",
+      border: "1px solid black",
+      overflow: "auto"
     };
     const planDivStyle = {
-      height: "inherit",
-      width: "90%",
+      height: "80%",
+      width: "88%",
       scroll: "auto",
       border: "1px solid black",
       overflow: "auto"
@@ -120,14 +139,27 @@ class PlanPage extends Component {
                     { key: "SE477", name: "SE477", credits: 3 },
                     { key: "SE478", name: "SE478", credits: 3 },
                     { key: "SE479", name: "SE479", credits: 3 },
-                    { key: "SE480", name: "SE480", credits: 3 }
+                    { key: "SE480", name: "SE480", credits: 3 },
+                    {key: "CSCI476", name: "CSCI476", credits: 3},
+                    {key: "MATH304", name: "MATH304", credits: 3},
+                    {key: "MATH222", name: "MATH222", credits: 4},
+                    {key: "CHEM211", name: "CHEM211", credits: 4},
+                    {key: "CSCI220", name: "CSCI220", credits: 4},
+                    {key: "MATH222", name: "MATH222", credits: 4},
+                    {key: "CHEM210", name: "CHEM210", credits: 4},
+                    {key: "CSCI299", name: "CSCI299", credits: 4}
                   ]}
-                />
-              </td>
+                courseAdded={this.state.courseAdded}
+                selectedCourseName={this.state.selectedCourseName}
+                courseAddedCallback={this.courseAddedCallback}/>
+              </td></tr>
+              <tr>
               <td style={planDivStyle}>
                 <Plan requiredCourses={this.state.requiredCourses}
                 handleSelectedCourse = {this.handleSelectedCourse}
-                courseIsSelected = {this.state.courseIsSelected} />
+                courseIsSelected = {this.state.courseIsSelected}
+                selectedCourseName = {this.state.selectedCourseName}
+                courseAdded={this.courseAdded}/>
               </td>
             </tr>
           </tbody>

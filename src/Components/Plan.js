@@ -74,15 +74,38 @@ class Plan extends Component {
         }
       ],
       requirements: [],
-      electiveCourses: []
+      electiveCourses: [],
+      selectedCourseName: this.props.selectedCourseName
     };
     this.selectedCourseHandler = this.selectedCourseHandler.bind(this);
+    this.courseAdded = this.courseAdded.bind(this);
+    this.updateState = this.updateState.bind(this);
   }
 
   selectedCourseHandler(course, isSelected) {
     var fromElectives = false;
     console.log("in planCourse handler" + course.state.name);
     this.props.handleSelectedCourse(course, fromElectives);
+  }
+
+  courseAdded(){
+    this.props.courseAdded();
+  }
+
+  componentDidUpdate() {
+    this.updateState();
+    console.log("infopanel component will receive props" + this.props.name);
+  }
+
+  updateState() {
+    if (this.props.selectedCourseName === this.state.selectedCourseName) {
+      console.log(" plan updateState()");
+    } else {
+      this.setState({
+        selectedCourseName: this.props.selectedCourseName,
+      });
+    }
+    console.log("plan.js state.name " +this.state.selectedCourseName);
   }
 
   render() {
@@ -114,6 +137,8 @@ class Plan extends Component {
               courses={semester.courses}
               selectedCourseHandler={this.selectedCourseHandler}
               courseIsSelected={this.props.courseIsSelected}
+              selectedCourseName={this.state.selectedCourseName}
+              courseAdded={this.courseAdded}
             />
           ))}
         </tbody>

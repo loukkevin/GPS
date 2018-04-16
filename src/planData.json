@@ -1,0 +1,41 @@
+{
+  "studentId": 123456789,
+  "semesters": [
+    {
+      "name": "Fall 2018",
+      "courses": ["SE240", "SE231", "SE101", "CSCI201", "MATH271"]
+    },
+    {
+      "name": "Spring 2019",
+      "courses": ["SE245", "SE221", "SE211", "CSCI301", "MATH221"]
+    },
+    {
+      "name": "Fall 2019",
+      "courses": ["SE460", "SE210", "SE276", "CSCI430", "MATH222"]
+    },
+    {
+      "name": "Spring 2020",
+      "courses": ["SE465", "SE470", "SE477", "CSCI450", "MATH312"]
+    },
+    {
+      "name": "Fall 2020",
+      "courses": ["SE475", "SE340", "STAT353", "CMST192", "MATH304"]
+    },
+    {
+      "name": "Spring 2021",
+      "courses": ["SE480", "CHEM160", "CMST341", "SE341", "POL191"]
+    },
+    {
+      "name": "Summer 2021",
+      "courses": ["SE444"]
+    },
+    {
+      "name": "Fall 2021",
+      "courses": ["SE490", "CHEM210", "BIOL103", "CMST220", "PSY115"]
+    },
+    {
+      "name": "Spring 2022",
+      "courses": ["SE491", "ENGL184", "ENGL192", "ETS185", "POL111"]
+    }
+  ]
+}

@@ -13,6 +13,7 @@ class Course extends Component {
     };
 
     this.handleClick = this.handleClick.bind(this);
+    this.deselectCourse = this.deselectCourse.bind(this);
   }
 
   componentDidMount(){
@@ -30,6 +31,16 @@ class Course extends Component {
           semestersOffered: json.semestersOffered
         });
       });
+  }
+
+  componentWillReceiveProps(props){
+    if (props.courseAdded){
+      this.setState({isToggleOn: false});
+    } 
+  }
+
+  deselectCourse(){
+    this.setState({isToggleOn: false});
   }
 
   handleClick() {

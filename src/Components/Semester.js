@@ -9,9 +9,11 @@ class Semester extends Component {
     this.state = {
       name: this.props.name,
       credits: 0,
-      courses: []
+      courses: [],
+      selectedCourseName: this.props.selectedCourseName
     };
     this.selectCourseHandler = this.selectCourseHandler.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentWillMount() {
@@ -31,8 +33,41 @@ class Semester extends Component {
 
   selectCourseHandler(course, isSelected) {
     var fromElectives = false;
-    console.log("in electiveCourses handler" + course.state.name);
+    console.log(
+      "in electiveCourses handler" +
+        course.state.name +
+        this.props.courseIsSelected
+    );
     this.props.selectedCourseHandler(course, fromElectives);
+  }
+
+  handleClick() {
+    let name = this.state.name;
+    console.log("clicked on semester " + name + this.props.courseIsSelected);
+    if (this.props.courseIsSelected) {
+      let courses = this.state.courses;
+      let courseName = this.state.selectedCourseName;
+      console.log("courseName " + courseName);
+      courses.push({ name: this.state.selectedCourseName, key: this.state.selectedCourseName });
+      this.setState({ courses: courses });
+      this.props.courseAdded();
+    }
+  }
+
+  componentDidUpdate() {
+    this.updateState();
+    console.log("semester component will receive props" + this.props.selectedCourseName);
+  }
+
+  updateState() {
+    if (this.props.selectedCourseName === this.state.selectedCourseName) {
+      console.log(" semester updateState()");
+    } else {
+      this.setState({
+        selectedCourseName: this.props.selectedCourseName,
+      });
+    }
+    console.log("semester.js state.name " +this.state.name);
   }
 
   render() {
@@ -44,18 +79,25 @@ class Semester extends Component {
     return (
       <tr style={style}>
         <td onClick={this.handleClick}>{this.state.name}</td>
-        {courses.map(course => (
-          <Course
-            disabled={false}
-            selectCourseHandler={this.selectCourseHandler}
-            key={course.name}
-            name={course.name}
-            prerequisites={course.prerequisites}
-            credits={course.credits}
-            description={course.description}
-            status="unselected"
-          />
-        ))}
+        <table style={{ height: "inherit" }}>
+          <tbody>
+            <tr>
+              {courses.map(course => (
+                <Course
+                  disabled={false}
+                  selectCourseHandler={this.selectCourseHandler}
+                  key={course.name}
+                  name={course.name}
+                  prerequisites={course.prerequisites}
+                  credits={course.credits}
+                  description={course.description}
+                  status="unselected"
+                />
+              ))}
+            </tr>
+          </tbody>
+        </table>
+
         <td>{this.state.credits}</td>
       </tr>
     );

@@ -6,9 +6,14 @@ class ElectiveCourses extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      electiveCourses: this.props.electiveCourses
+      electiveCourses: [],
+      courseAdded: false
     };
     this.selectedCourseHandler = this.selectedCourseHandler.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({ electiveCourses: this.props.electiveCourses });
   }
 
   selectedCourseHandler(course, isSelected) {
@@ -17,34 +22,51 @@ class ElectiveCourses extends Component {
     this.props.handleSelectedCourse(course, fromElectives);
   }
 
+  componentWillReceiveProps(props) {
+    if (props.courseAdded) {
+      this.setState({ courseAdded: true });
+      var courses = this.state.electiveCourses;
+      var courseName = "";
+      for (var index = 0; index < courses.length; index++) {
+        courseName = courses[index].name;
+        if (courseName === this.props.selectedCourseName) {
+          courses.splice(index, 1);
+          this.setState({ electiveCourses: courses });
+        }
+      }
+      this.props.courseAddedCallback(false);
+    } else {
+      this.setState({ courseAdded: false });
+    }
+  }
+
   render() {
     let courses = this.state.electiveCourses;
 
     return (
-      <table
-        style={{
-          border: "1px solid black",
-          alignContent: "center",
-          height: "inherit"
-        }}
-      >
+        <table
+          style={{
+            height: "inherit",
+            border: "none",
+            overflow: "auto"
+          }}
+        >
         <thead>
           <tr>
-            <td>Elective Courses</td>
+            <th style={{columnSpan: 6}}>Elective Courses</th>
           </tr>
         </thead>
-        <tbody>
-          {courses.map(course => (
-            <tr key={course.name}>
-              <Course
-                selectCourseHandler={this.selectedCourseHandler}
-                key={course.name}
-                name={course.name}
-              />
-            </tr>
-          ))}
-        </tbody>
-      </table>
+          <tbody>
+            {courses.map(course => (
+                <Course
+                  selectCourseHandler={this.selectedCourseHandler}
+                  key={course.name}
+                  name={course.name}
+                  courseAdded={this.state.courseAdded}
+                />
+            ))}
+          </tbody>
+        </table>
     );
   }
 }
