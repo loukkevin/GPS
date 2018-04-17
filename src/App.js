@@ -17,7 +17,7 @@ class App extends Component {
       submitted: false,
       electivesChosen: false,
       url: "",
-      api: "https://scsu-gps-server.herokuapp.com/parse?darsURL="
+      api: "http://localhost:8080/parse?darsURL="//"https://scsu-gps-server.herokuapp.com/parse?darsURL="
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -102,6 +102,7 @@ class App extends Component {
                   <div style={dividerStyle} />
                 </div>
               ))}
+              <div><button onClick={this.openPlanPage}>Continue To Plan</button></div>
             </div>
           </div>
         );

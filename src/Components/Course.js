@@ -16,7 +16,7 @@ class Course extends Component {
     this.deselectCourse = this.deselectCourse.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     let api = "http://localhost:8080/getCourseInformation?name="; //"https://scsu-gps-server.herokuapp.com/getCourseInformation?name= ";
     fetch(api + this.state.name)
       .then(response => {
@@ -43,7 +43,8 @@ class Course extends Component {
   }
 
   handleClick() {
-    if (!this.props.fulfilled) { //need to be able to deselect
+    if (!this.props.fulfilled) {
+      //need to be able to deselect
       this.setState(prevState => ({
         isToggleOn: !prevState.isToggleOn
       }));
@@ -53,7 +54,7 @@ class Course extends Component {
         this.props.selectCourseHandler(this, false);
       }
     }
-    if (this.props.fulfilled && this.isSelected()){
+    if (this.props.fulfilled && this.isSelected()) {
       this.setState(prevState => ({
         isToggleOn: !prevState.isToggleOn
       }));
@@ -81,13 +82,15 @@ class Course extends Component {
         display: "inline-block",
         fontSize: "22px",
         border: "1px solid black",
-        width: "103px",
+        width: "110px",
         height: "50px",
         fontWeight: "bold"
       };
       return (
-        <td onClick={this.handleClick} style={style}>
-          {this.state.name}
+        <td style = {style}> 
+          <button onClick={this.handleClick} style={style}>
+            {this.state.name}
+          </button>
         </td>
       );
     } else {
@@ -98,15 +101,17 @@ class Course extends Component {
         textDecoration: "none",
         display: "inline-block",
         fontSize: "22px",
-        width: "103px",
+        width: "110px",
         height: "50px",
         fontWeight: "bold",
         border: "1px solid black",
         margin: ""
       };
       return (
-        <td onClick={this.handleClick} style={style}>
-          {this.state.name}
+        <td style = {style}>
+          <button onClick={this.handleClick} style={style}>
+            {this.state.name}
+          </button>
         </td>
       );
     }

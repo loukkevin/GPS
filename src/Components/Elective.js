@@ -28,7 +28,7 @@ class Elective extends Component {
     console.log("in Handler");
     if (this.state.electiveType === "credit") {
       if (selected) {
-        this.setState({ numSelected: this.state.numSelected + course.credits });
+        this.setState({ numSelected: this.state.numSelected - course.credits });
         let courses = this.state.coursesSelected;
         let courseName = course.name;
         console.log("courseName " + courseName);
@@ -38,7 +38,7 @@ class Elective extends Component {
         });
         this.setState({ coursesSelected: courses });
       } else {
-        this.setState({ numSelected: this.state.numSelected - course.credits });
+        this.setState({ numSelected: this.state.numSelected + course.credits });
         var courses = this.state.coursesSelected;
         var courseName = "";
         for (var index = 0; index < courses.length; index++) {
@@ -51,7 +51,7 @@ class Elective extends Component {
       }
     } else {
       if (selected) {
-        this.setState({ numSelected: this.state.numSelected + 1 });
+        this.setState({ numSelected: this.state.numSelected - 1 });
         let courses = this.state.coursesSelected;
         let courseName = course.name;
         console.log("courseName " + courseName);
@@ -61,7 +61,7 @@ class Elective extends Component {
         });
         this.setState({ coursesSelected: courses });
       } else {
-        this.setState({ numSelected: this.state.numSelected - 1 });
+        this.setState({ numSelected: this.state.numSelected + 1 });
         var courses = this.state.coursesSelected;
         var courseName = "";
         for (var index = 0; index < courses.length; index++) {
@@ -104,10 +104,11 @@ class Elective extends Component {
       overflow: "auto"
     };
 
-    console.log(courses);
-    console.log(numCredits);
-    console.log(numSelected);
-    console.log(fulfilled);
+    console.log("courses " +courses);
+    console.log("Credits " + numCredits);
+    console.log("numCourses " + numCourses);
+    console.log("numSelected " + numSelected);
+    console.log("fulfilled " + fulfilled);
 
     //if elective is fulfilled, this is rendered
     if (
@@ -118,26 +119,19 @@ class Elective extends Component {
         <div style={fulfilledStyle}>
           <table>
             <tbody>
-              <tr className="electiveRow" style={styles.electiveRowStyle}>
+              <tr className="electiveRow">
                 {courses.map(course => (
-                  <td>
-                    <Course
-                      key={course.name}
-                      disabled={this.state.fulfilled}
-                      selectCourseHandler={this.selectCourseHandler}
-                      name={course.name}
-                      prerequisites={course.prerequisites}
-                      credits={course.credits}
-                      description={course.description}
-                      status="unselected"
-                    />
-                  </td>
+                  <Course
+                    key={course.name}
+                    fulfilled={this.state.fulfilled}
+                    selectCourseHandler={this.selectCourseHandler}
+                    name={course.name}
+                    prerequisites={course.prerequisites}
+                    credits={course.credits}
+                    description={course.description}
+                    status="unselected"
+                  />
                 ))}
-              </tr>
-              <tr>
-                <td>Credits: {this.state.numCredits}</td>
-                <td>Courses: {this.state.numCourses}</td>
-                <td>Num Selected: {this.state.numSelected}</td>
               </tr>
             </tbody>
           </table>
@@ -148,7 +142,7 @@ class Elective extends Component {
       const electiveStyle = {
         border: "2px solid black",
         margin: "auto",
-        overflow: "auto"
+        overflow: "auto",
       };
       const rowStyle = {
         width: "75%"
@@ -158,9 +152,8 @@ class Elective extends Component {
         <div style={electiveStyle}>
           <table>
             <tbody>
-              <tr className="electiveRow" style={rowStyle}>
+              <tr>
                 {courses.map(course => (
-                  <td>
                     <Course
                       key={course.name}
                       selectCourseHandler={this.selectCourseHandler}
@@ -171,13 +164,7 @@ class Elective extends Component {
                       description={course.description}
                       status="unselected"
                     />
-                  </td>
                 ))}
-              </tr>
-              <tr>
-                <td>Credits: {this.state.numCredits}</td>
-                <td>Courses: {this.state.numCourses}</td>
-                <td>Num Selected: {this.state.numSelected}</td>
               </tr>
             </tbody>
           </table>

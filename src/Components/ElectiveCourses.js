@@ -95,7 +95,7 @@ class ElectiveCourses extends Component {
             fontSize: "5vw",
             color: "green"
           }}>
-              No Elective Courses Needed
+              <td>No Elective Courses Needed</td>
             </tr>
           </tbody>
         </table>
