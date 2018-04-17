@@ -17,7 +17,7 @@ class Course extends Component {
   }
 
   componentWillMount() {
-    let api = "http://localhost:8080/getCourseInformation?name="; //"https://scsu-gps-server.herokuapp.com/getCourseInformation?name= ";
+    let api = "https://scsu-gps-server.herokuapp.com/getCourseInformation?name= ";
     fetch(api + this.state.name)
       .then(response => {
         return response.json();
