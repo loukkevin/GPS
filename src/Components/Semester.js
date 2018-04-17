@@ -84,7 +84,7 @@ class Semester extends Component {
             <tr>
               {courses.map(course => (
                 <Course
-                  disabled={false}
+                  fulfilled={this.props.courseIsSelected}
                   selectCourseHandler={this.selectCourseHandler}
                   key={course.name}
                   name={course.name}

@@ -8,10 +8,7 @@ class PlanPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      requirements: [
-        { requiredCourse: "SE 240" },
-        { requiredCourse: "SE 245" }
-      ],
+      requirements: [],
       electiveCourses: [],
       requiredCourses: [],
       selectedCourseName: "name",
@@ -45,7 +42,7 @@ class PlanPage extends Component {
     this.setState({ requiredCourses: requiredCourses });
   }
 
-  addCourse(){
+  addCourse() {
     return this.state.selectedCourseName;
   }
 
@@ -64,15 +61,15 @@ class PlanPage extends Component {
     console.log("in plan page course handler" + this.state.courseIsSelected);
   }
 
-  courseAdded(){
+  courseAdded() {
     this.setState(prevState => ({
       courseIsSelected: !prevState.courseIsSelected,
       courseAdded: true
     }));
   }
 
-  courseAddedCallback(){
-    this.setState({courseAdded: false})
+  courseAddedCallback() {
+    this.setState({ courseAdded: false });
   }
 
   render() {
@@ -133,33 +130,23 @@ class PlanPage extends Component {
               <td style={electiveCoursesDivStyle}>
                 <ElectiveCourses
                   handleSelectedCourse={this.handleSelectedCourse}
-                  electiveCourses={[
-                    { key: "SE412", name: "SE412", credits: 3 },
-                    { key: "SE476", name: "SE476", credits: 3 },
-                    { key: "SE477", name: "SE477", credits: 3 },
-                    { key: "SE478", name: "SE478", credits: 3 },
-                    { key: "SE479", name: "SE479", credits: 3 },
-                    { key: "SE480", name: "SE480", credits: 3 },
-                    {key: "CSCI476", name: "CSCI476", credits: 3},
-                    {key: "MATH304", name: "MATH304", credits: 3},
-                    {key: "MATH222", name: "MATH222", credits: 4},
-                    {key: "CHEM211", name: "CHEM211", credits: 4},
-                    {key: "CSCI220", name: "CSCI220", credits: 4},
-                    {key: "MATH222", name: "MATH222", credits: 4},
-                    {key: "CHEM210", name: "CHEM210", credits: 4},
-                    {key: "CSCI299", name: "CSCI299", credits: 4}
-                  ]}
-                courseAdded={this.state.courseAdded}
-                selectedCourseName={this.state.selectedCourseName}
-                courseAddedCallback={this.courseAddedCallback}/>
-              </td></tr>
-              <tr>
+                  electiveCourses={this.state.electiveCourses}
+                  courseAdded={this.state.courseAdded}
+                  selectedCourseName={this.state.selectedCourseName}
+                  courseAddedCallback={this.courseAddedCallback}
+                  courseIsSelected={this.state.courseIsSelected}
+                />
+              </td>
+            </tr>
+            <tr>
               <td style={planDivStyle}>
-                <Plan requiredCourses={this.state.requiredCourses}
-                handleSelectedCourse = {this.handleSelectedCourse}
-                courseIsSelected = {this.state.courseIsSelected}
-                selectedCourseName = {this.state.selectedCourseName}
-                courseAdded={this.courseAdded}/>
+                <Plan
+                  requiredCourses={this.state.requiredCourses}
+                  handleSelectedCourse={this.handleSelectedCourse}
+                  courseIsSelected={this.state.courseIsSelected}
+                  selectedCourseName={this.state.selectedCourseName}
+                  courseAdded={this.courseAdded}
+                />
               </td>
             </tr>
           </tbody>

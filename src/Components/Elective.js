@@ -19,23 +19,58 @@ class Elective extends Component {
       numCourses: this.props.numCourses,
       fulfilled: false,
       numSelected: 0,
-      electiveType: type
+      electiveType: type,
+      coursesSelected: []
     };
   }
 
-  selectCourseHandler(credits, selected) {
+  selectCourseHandler(course, selected) {
     console.log("in Handler");
     if (this.state.electiveType === "credit") {
       if (selected) {
-        this.setState({ numSelected: this.state.numSelected + credits });
+        this.setState({ numSelected: this.state.numSelected + course.credits });
+        let courses = this.state.coursesSelected;
+        let courseName = course.name;
+        console.log("courseName " + courseName);
+        courses.push({
+          name: course.name,
+          key: course.name
+        });
+        this.setState({ coursesSelected: courses });
       } else {
-        this.setState({ numSelected: this.state.numSelected - credits });
+        this.setState({ numSelected: this.state.numSelected - course.credits });
+        var courses = this.state.coursesSelected;
+        var courseName = "";
+        for (var index = 0; index < courses.length; index++) {
+          courseName = courses[index].name;
+          if (courseName === course.name) {
+            courses.splice(index, 1);
+            this.setState({ coursesSelected: courses });
+          }
+        }
       }
     } else {
       if (selected) {
         this.setState({ numSelected: this.state.numSelected + 1 });
+        let courses = this.state.coursesSelected;
+        let courseName = course.name;
+        console.log("courseName " + courseName);
+        courses.push({
+          name: course.name,
+          key: course.name
+        });
+        this.setState({ coursesSelected: courses });
       } else {
         this.setState({ numSelected: this.state.numSelected - 1 });
+        var courses = this.state.coursesSelected;
+        var courseName = "";
+        for (var index = 0; index < courses.length; index++) {
+          courseName = courses[index].name;
+          if (courseName === course.name) {
+            courses.splice(index, 1);
+            this.setState({ coursesSelected: courses });
+          }
+        }
       }
     }
     if (this.state.electiveType === "credit") {
@@ -87,7 +122,7 @@ class Elective extends Component {
                 {courses.map(course => (
                   <Course
                     key={course.name}
-                    disabled={true}
+                    disabled={this.state.fulfilled}
                     selectCourseHandler={this.selectCourseHandler}
                     name={course.name}
                     prerequisites={course.prerequisites}

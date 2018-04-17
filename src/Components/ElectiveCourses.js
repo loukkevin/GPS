@@ -43,7 +43,8 @@ class ElectiveCourses extends Component {
   render() {
     let courses = this.state.electiveCourses;
 
-    return (
+    if ( courses !== undefined && courses.length > 0 ) {
+      return (
         <table
           style={{
             height: "inherit",
@@ -51,23 +52,55 @@ class ElectiveCourses extends Component {
             overflow: "auto"
           }}
         >
-        <thead>
-          <tr>
-            <th style={{columnSpan: 6}}>Elective Courses</th>
-          </tr>
-        </thead>
+          <thead>
+            <tr>
+              <th style={{ columnSpan: 6 }}>Elective Courses</th>
+            </tr>
+          </thead>
           <tbody>
-            {courses.map(course => (
+            <tr>
+              {courses.map(course => (
                 <Course
                   selectCourseHandler={this.selectedCourseHandler}
                   key={course.name}
                   name={course.name}
                   courseAdded={this.state.courseAdded}
+                  fulfilled={this.props.courseIsSelected}
                 />
-            ))}
+              ))}
+            </tr>
           </tbody>
         </table>
-    );
+      );
+    } else {
+      return (
+        <table
+          style={{
+            height: "inherit",
+            border: "2px solid black",
+            overflow: "auto"
+          }}
+        >
+          <thead>
+            <tr>
+              <th style={{ columnSpan: 6 }}>Elective Courses</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{
+            height: "inherit",
+            border: "none",
+            overflow: "auto",
+            textAlign: "center",
+            fontSize: "5vw",
+            color: "green"
+          }}>
+              No Elective Courses Needed
+            </tr>
+          </tbody>
+        </table>
+      );
+    }
   }
 }
 export default ElectiveCourses;

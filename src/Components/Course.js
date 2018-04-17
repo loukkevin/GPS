@@ -16,8 +16,7 @@ class Course extends Component {
     this.deselectCourse = this.deselectCourse.bind(this);
   }
 
-  componentDidMount(){
-        
+  componentDidMount() {
     let api = "http://localhost:8080/getCourseInformation?name="; //"https://scsu-gps-server.herokuapp.com/getCourseInformation?name= ";
     fetch(api + this.state.name)
       .then(response => {
@@ -33,24 +32,36 @@ class Course extends Component {
       });
   }
 
-  componentWillReceiveProps(props){
-    if (props.courseAdded){
-      this.setState({isToggleOn: false});
-    } 
+  componentWillReceiveProps(props) {
+    if (props.courseAdded) {
+      this.setState({ isToggleOn: false });
+    }
   }
 
-  deselectCourse(){
-    this.setState({isToggleOn: false});
+  deselectCourse() {
+    this.setState({ isToggleOn: false });
   }
 
   handleClick() {
-    this.setState(prevState => ({
-      isToggleOn: !prevState.isToggleOn
-    }));
-    if (this.isSelected()) {
-      this.props.selectCourseHandler(this, true);
-    } else {
-      this.props.selectCourseHandler(this, false);
+    if (!this.props.fulfilled) { //need to be able to deselect
+      this.setState(prevState => ({
+        isToggleOn: !prevState.isToggleOn
+      }));
+      if (this.isSelected()) {
+        this.props.selectCourseHandler(this, true);
+      } else {
+        this.props.selectCourseHandler(this, false);
+      }
+    }
+    if (this.props.fulfilled && this.isSelected()){
+      this.setState(prevState => ({
+        isToggleOn: !prevState.isToggleOn
+      }));
+      if (this.isSelected()) {
+        this.props.selectCourseHandler(this, true);
+      } else {
+        this.props.selectCourseHandler(this, false);
+      }
     }
   }
 
