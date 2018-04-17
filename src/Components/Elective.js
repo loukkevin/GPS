@@ -120,16 +120,18 @@ class Elective extends Component {
             <tbody>
               <tr className="electiveRow" style={styles.electiveRowStyle}>
                 {courses.map(course => (
-                  <Course
-                    key={course.name}
-                    disabled={this.state.fulfilled}
-                    selectCourseHandler={this.selectCourseHandler}
-                    name={course.name}
-                    prerequisites={course.prerequisites}
-                    credits={course.credits}
-                    description={course.description}
-                    status="unselected"
-                  />
+                  <td>
+                    <Course
+                      key={course.name}
+                      disabled={this.state.fulfilled}
+                      selectCourseHandler={this.selectCourseHandler}
+                      name={course.name}
+                      prerequisites={course.prerequisites}
+                      credits={course.credits}
+                      description={course.description}
+                      status="unselected"
+                    />
+                  </td>
                 ))}
               </tr>
               <tr>

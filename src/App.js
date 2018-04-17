@@ -122,7 +122,7 @@ class App extends Component {
           height: "40px"
         };
 
-        if (this.state.submitted && this.state.requirements.length > 0) {
+        if (this.state.submitted && this.state.requirements !== undefined && this.state.requirements.length > 0) {
           return (
             <div>
               <div>
