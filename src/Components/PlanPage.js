@@ -130,7 +130,7 @@ class PlanPage extends Component {
               <td style={electiveCoursesDivStyle}>
                 <ElectiveCourses
                   handleSelectedCourse={this.handleSelectedCourse}
-                  electiveCourses={this.state.electiveCourses}
+                  electiveCourses={this.state.requiredCourses}
                   courseAdded={this.state.courseAdded}
                   selectedCourseName={this.state.selectedCourseName}
                   courseAddedCallback={this.courseAddedCallback}
