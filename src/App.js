@@ -146,8 +146,8 @@ class App extends Component {
           );
         } else if (
           this.state.submitted &&
-          this.state.requirements === undefined)
-         {
+          this.state.requirements.length === 0
+        ) {
           <div>
             <div>
               <p>
