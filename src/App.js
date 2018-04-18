@@ -1,11 +1,7 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import Course from "./Components/Course";
 import Elective from "./Components/Elective";
 import PlanPage from "./Components/PlanPage";
-import HTML5Backend from "react-dnd-html5-backend";
-import { DragDropContext } from "react-dnd";
 
 class App extends Component {
   constructor() {
@@ -14,19 +10,53 @@ class App extends Component {
       requirements: [],
       electives: [],
       coursesTaken: [],
+      coursesSelected: [],
       submitted: false,
       electivesChosen: false,
       url: "",
-      api: "https://scsu-gps-server.herokuapp.com/parse?darsURL=" //"http://localhost:8080/parse?darsURL="//
+      api: "https://scsu-gps-server.herokuapp.com/parse?darsURL=" //"http://localhost:8080/parse?darsURL=" //
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.openPlanPage = this.openPlanPage.bind(this);
+    this.updateCourses = this.updateCourses.bind(this);
   }
 
   //used for grabbing the url from the text box
   handleChange(event) {
     this.setState({ url: event.target.value });
+  }
+
+  updateCourses(course, selected) {
+    if (!selected) {
+      let courses = this.state.coursesSelected;
+      if (courses === undefined) {
+        courses = [];
+      }
+      let courseName = course;
+      console.log("courses -->" + courses + "<-- courses");
+      courses.push({
+        name: course,
+        key: course
+      });
+      console.log("after push attempt: courses -->" + courses + "<-- courses");
+      this.setState({ coursesSelected: courses });
+    } else {
+      console.log("courseName " + courseName);
+      var courses = this.state.coursesSelected;
+      var courseName = "";
+      for (var index = 0; index < courses.length; index++) {
+        courseName = courses[index].name;
+        if (courseName === course) {
+          courses.splice(index, 1);
+          this.setState({ coursesSelected: courses });
+        }
+      }
+    }
+    console.log("in updateCourses");
+    // this.setState({
+    //   coursesSelected: courses
+    // });
   }
 
   //handles submitting the DARS url
@@ -53,16 +83,19 @@ class App extends Component {
       "Here is where the plan page should open" + this.state.electivesChosen
     );
     this.setState({ electivesChosen: true });
-    console.log(this.state.requirements);
+    console.log(this.state.coursesSelected);
   }
 
   render() {
+
     if (this.state.electivesChosen) {
+      let courses = this.state.coursesSelected;
+      console.log("coursesSelected" + courses);
       return (
         <div>
           <PlanPage
             requirements={this.state.requirements}
-            electives={this.state.electives}
+            electiveCourses={courses}
           />
         </div>
       );
@@ -98,6 +131,7 @@ class App extends Component {
                     courses={elective.electiveCourses}
                     numCredits={elective.numOfCredits}
                     numCourses={elective.numOfCourses}
+                    updateCourses={this.updateCourses}
                   />
                   <div style={dividerStyle} />
                 </div>
@@ -144,10 +178,7 @@ class App extends Component {
               </div>
             </div>
           );
-        } else if (
-          this.state.submitted &&
-          !this.state.electivesChosen
-        ) {
+        } else if (this.state.submitted && !this.state.electivesChosen) {
           <div>
             <div>
               <p>

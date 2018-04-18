@@ -20,7 +20,7 @@ class InfoPanel extends Component {
   }
 
   updateState() {
-    if (this.props.name == this.state.name) {
+    if (this.props.name === this.state.name) {
       console.log("updateState()");
     } else {
       this.setState({

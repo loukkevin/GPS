@@ -18,10 +18,10 @@ class ElectiveCourses extends Component {
     console.log("componentDidMount electiveCourses " + test.length);
   }
 
-  selectedCourseHandler(course, isSelected) {
+  selectedCourseHandler(course, credits,description,prerequisites,semestersOffered, isSelected) {
     var fromElectives = true;
-    console.log("in electiveCourses handler" + course.state.name);
-    this.props.handleSelectedCourse(course, fromElectives);
+    console.log("in electiveCourses handler" + course);
+    this.props.handleSelectedCourse(course, credits,description,prerequisites,semestersOffered, fromElectives);
   }
 
   componentWillReceiveProps(props) {

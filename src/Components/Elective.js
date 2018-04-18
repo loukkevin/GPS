@@ -24,26 +24,27 @@ class Elective extends Component {
     };
   }
 
-  selectCourseHandler(course, selected) {
-    console.log("in Handler");
+  selectCourseHandler(course, credits,description,prerequisites,semestersOffered, selected) {
+    console.log("in Handler, selected " + selected);
+    this.props.updateCourses(course,selected);
     if (this.state.electiveType === "credit") {
       if (selected) {
-        this.setState({ numSelected: this.state.numSelected - course.credits });
+        this.setState({ numSelected: this.state.numSelected - credits });
         let courses = this.state.coursesSelected;
-        let courseName = course.name;
+        let courseName = course;
         console.log("courseName " + courseName);
         courses.push({
-          name: course.name,
-          key: course.name
+          name: course,
+          key: course
         });
         this.setState({ coursesSelected: courses });
       } else {
-        this.setState({ numSelected: this.state.numSelected + course.credits });
+        this.setState({ numSelected: this.state.numSelected + credits });
         var courses = this.state.coursesSelected;
         var courseName = "";
         for (var index = 0; index < courses.length; index++) {
           courseName = courses[index].name;
-          if (courseName === course.name) {
+          if (courseName === course) {
             courses.splice(index, 1);
             this.setState({ coursesSelected: courses });
           }
@@ -53,11 +54,11 @@ class Elective extends Component {
       if (selected) {
         this.setState({ numSelected: this.state.numSelected - 1 });
         let courses = this.state.coursesSelected;
-        let courseName = course.name;
+        let courseName = course;
         console.log("courseName " + courseName);
         courses.push({
-          name: course.name,
-          key: course.name
+          name: course,
+          key: course
         });
         this.setState({ coursesSelected: courses });
       } else {
@@ -66,7 +67,7 @@ class Elective extends Component {
         var courseName = "";
         for (var index = 0; index < courses.length; index++) {
           courseName = courses[index].name;
-          if (courseName === course.name) {
+          if (courseName === course) {
             courses.splice(index, 1);
             this.setState({ coursesSelected: courses });
           }
@@ -104,11 +105,11 @@ class Elective extends Component {
       overflow: "auto"
     };
 
-    console.log("courses " +courses);
-    console.log("Credits " + numCredits);
-    console.log("numCourses " + numCourses);
-    console.log("numSelected " + numSelected);
-    console.log("fulfilled " + fulfilled);
+    // console.log("courses " +courses);
+    // console.log("Credits " + numCredits);
+    // console.log("numCourses " + numCourses);
+    // console.log("numSelected " + numSelected);
+    // console.log("fulfilled " + fulfilled);
 
     //if elective is fulfilled, this is rendered
     if (

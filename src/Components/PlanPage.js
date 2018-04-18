@@ -26,8 +26,10 @@ class PlanPage extends Component {
     // this.setState({ electiveCourses: this.props.electiveCourses });
     //this.getRequirementCourses();
     var requirements = this.props.requirements;
-    console.log("planPage requirements " + requirements[0].requiredCourse.name);
-    var courses = this.state.electiveCourses;
+    console.log("planPage requirements " + this.props.electiveCourses[0].name);
+    let courses = [];
+    courses = this.props.electiveCourses;
+    console.log("courses length " + courses.length);
     for (var i = 0; i < requirements.length; i++) {
       courses.push({
         name: requirements[i].requiredCourse.name,
@@ -35,6 +37,7 @@ class PlanPage extends Component {
       });
       console.log(requirements[i].requiredCourse.name + " ");
     }
+    console.log("courses length " + courses.length);
     this.setState({ electiveCourses: courses });
     this.handleSelectedCourse = this.handleSelectedCourse.bind(this);
     this.courseAdded = this.courseAdded.bind(this);
@@ -61,13 +64,13 @@ class PlanPage extends Component {
     return this.state.selectedCourseName;
   }
 
-  handleSelectedCourse(course, fromElectives) {
+  handleSelectedCourse(course, credits,description,prerequisites,semestersOffered,fromElectives) {
     this.setState({
-      selectedCourseName: course.state.name,
-      selectedCourseDescription: course.state.description,
-      selectedCourseCredits: course.state.credits,
-      selectedCoursePrerequisites: course.state.prerequisites,
-      selectedCourseSemestersOffered: course.state.semestersOffered
+      selectedCourseName: course,
+      selectedCourseDescription: description,
+      selectedCourseCredits: credits,
+      selectedCoursePrerequisites: prerequisites,
+      selectedCourseSemestersOffered: semestersOffered
     });
     this.setState(prevState => ({
       courseIsSelected: !prevState.courseIsSelected

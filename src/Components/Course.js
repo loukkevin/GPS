@@ -17,7 +17,7 @@ class Course extends Component {
   }
 
   componentWillMount() {
-    let api = "https://scsu-gps-server.herokuapp.com/getCourseInformation?name= ";//"http://localhost:8080/getCourseInformation?name="//
+    let api = "https://scsu-gps-server.herokuapp.com/getCourseInformation?name= "; //"http://localhost:8080/getCourseInformation?name="; //
     fetch(api + this.state.name)
       .then(response => {
         return response.json();
@@ -49,9 +49,23 @@ class Course extends Component {
         isToggleOn: !prevState.isToggleOn
       }));
       if (this.isSelected()) {
-        this.props.selectCourseHandler(this, true);
+        this.props.selectCourseHandler(
+          this.state.name,
+          this.state.credits,
+          this.state.description,
+          this.state.prerequisites,
+          this.state.semestersOffered,
+          true
+        );
       } else {
-        this.props.selectCourseHandler(this, false);
+        this.props.selectCourseHandler(
+          this.state.name,
+          this.state.credits,
+          this.state.description,
+          this.state.prerequisites,
+          this.state.semestersOffered,
+          false
+        );
       }
     }
     if (this.props.fulfilled && this.isSelected()) {
@@ -59,9 +73,23 @@ class Course extends Component {
         isToggleOn: !prevState.isToggleOn
       }));
       if (this.isSelected()) {
-        this.props.selectCourseHandler(this, true);
+        this.props.selectCourseHandler(
+          this.state.name,
+          this.state.credits,
+          this.state.description,
+          this.state.prerequisites,
+          this.state.semestersOffered,
+          true
+        );
       } else {
-        this.props.selectCourseHandler(this, false);
+        this.props.selectCourseHandler(
+          this.state.name,
+          this.state.credits,
+          this.state.description,
+          this.state.prerequisites,
+          this.state.semestersOffered,
+          false
+        );
       }
     }
   }
@@ -87,7 +115,7 @@ class Course extends Component {
         fontWeight: "bold"
       };
       return (
-        <td style = {style}> 
+        <td style={style}>
           <button onClick={this.handleClick} style={style}>
             {this.state.name}
           </button>
@@ -108,7 +136,7 @@ class Course extends Component {
         margin: ""
       };
       return (
-        <td style = {style}>
+        <td style={style}>
           <button onClick={this.handleClick} style={style}>
             {this.state.name}
           </button>
