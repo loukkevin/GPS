@@ -146,7 +146,7 @@ class App extends Component {
           );
         } else if (
           this.state.submitted &&
-          this.state.requirements.length === 0
+          !this.state.electivesChosen
         ) {
           <div>
             <div>
