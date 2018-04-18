@@ -102,7 +102,9 @@ class App extends Component {
                   <div style={dividerStyle} />
                 </div>
               ))}
-              <div><button onClick={this.openPlanPage}>Continue To Plan</button></div>
+              <div>
+                <button onClick={this.openPlanPage}>Continue To Plan</button>
+              </div>
             </div>
           </div>
         );
@@ -123,7 +125,11 @@ class App extends Component {
           height: "40px"
         };
 
-        if (this.state.submitted && this.state.requirements !== undefined && this.state.requirements.length > 0) {
+        if (
+          this.state.submitted &&
+          this.state.requirements !== undefined &&
+          this.state.requirements.length > 0
+        ) {
           return (
             <div>
               <div>
@@ -140,6 +146,7 @@ class App extends Component {
           );
         } else if (
           this.state.submitted &&
+          this.state.requirements !== undefined &&
           this.state.requirements.length === 0
         ) {
           <div>
