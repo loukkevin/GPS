@@ -51,7 +51,7 @@ class Semester extends Component {
       courses.push({ name: this.state.selectedCourseName, key: this.state.selectedCourseName });
       this.setState({ courses: courses });
       let courseCredits = 0;
-      let api = "http://localhost:8080/getCourseInformation?name="//"https://scsu-gps-server.herokuapp.com/getCourseInformation?name= ";
+      let api = "https://scsu-gps-server.herokuapp.com/getCourseInformation?name= ";//"http://localhost:8080/getCourseInformation?name="//
     fetch(api + this.state.selectedCourseName)
       .then(response => {
         return response.json();
