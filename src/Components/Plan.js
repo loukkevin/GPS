@@ -10,66 +10,56 @@ class Plan extends Component {
       semesters: [
         {
           name: "Fall 2018",
-          credits: 3,
+          credits: 0,
           courses: [
-            { name: "SE240", credits: 3 },
-            { name: "SE245", credits: 3 }
           ]
         },
         {
           name: "Spring 2019",
-          credits: 3,
+          credits: 0,
           courses: [
-            { name: "SE231", credits: 4 },
-            { name: "SE221", credits: 4 }
+
           ]
         },
         {
           name: "Fall 2019",
-          credits: 3,
+          credits: 0,
           courses: [
-            { name: "CSCI201", credits: 3 },
-            { name: "MATH221", credits: 3 }
+
           ]
         },
         {
           name: "Spring 2020",
-          credits: 3,
+          credits: 0,
           courses: [
-            { name: "SE460", credits: 3 },
-            { name: "SE465", credits: 4 }
+
           ]
         },
         {
           name: "Fall 2020",
-          credits: 3,
+          credits: 0,
           courses: [
-            { name: "SE470", credits: 3 },
-            { name: "SE475", credits: 3 }
           ]
         },
         {
           name: "Spring 2021",
-          credits: 3,
+          credits: 0,
           courses: [
-            { name: "SE480", credits: 4 },
-            { name: "CSCI411", credits: 4 }
+
           ]
         },
         {
           name: "Fall 2021",
-          credits: 3,
+          credits: 0,
           courses: [
-            { name: "SE490", credits: 3 },
-            { name: "MATH271", credits: 3 }
+
           ]
         },
         {
           name: "Spring 2022",
-          credits: 3,
+          credits: 0,
           courses: [
-            { name: "SE491", credits: 3 },
-            { name: "MATH312", credits: 4 }
+
           ]
         }
       ],

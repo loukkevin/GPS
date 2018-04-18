@@ -17,7 +17,7 @@ class App extends Component {
       submitted: false,
       electivesChosen: false,
       url: "",
-      api: "https://scsu-gps-server.herokuapp.com/parse?darsURL="
+      api: "http://localhost:8080/parse?darsURL="//"https://scsu-gps-server.herokuapp.com/parse?darsURL="
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -53,7 +53,7 @@ class App extends Component {
       "Here is where the plan page should open" + this.state.electivesChosen
     );
     this.setState({ electivesChosen: true });
-    console.log(this.state.coursesTaken);
+    console.log(this.state.requirements);
   }
 
   render() {

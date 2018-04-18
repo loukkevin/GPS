@@ -50,6 +50,20 @@ class Semester extends Component {
       console.log("courseName " + courseName);
       courses.push({ name: this.state.selectedCourseName, key: this.state.selectedCourseName });
       this.setState({ courses: courses });
+      let courseCredits = 0;
+      let api = "http://localhost:8080/getCourseInformation?name="//"https://scsu-gps-server.herokuapp.com/getCourseInformation?name= ";
+    fetch(api + this.state.selectedCourseName)
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+          courseCredits = json.credits;
+          let totalCredits = this.state.credits + courseCredits;
+          console.log(totalCredits);
+          this.setState({credits: totalCredits});
+      });
+
+      //this.calculateCredits();
       this.props.courseAdded();
     }
   }
@@ -81,7 +95,7 @@ class Semester extends Component {
         <td onClick={this.handleClick}>{this.state.name}</td>
         <table style={{ height: "inherit" }}>
           <tbody>
-            <tr>
+            <tr style={{ height: "50px" }}>
               {courses.map(course => (
                 <Course
                   fulfilled={this.props.courseIsSelected}

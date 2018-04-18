@@ -14,6 +14,8 @@ class ElectiveCourses extends Component {
 
   componentDidMount() {
     this.setState({ electiveCourses: this.props.electiveCourses });
+    var test = this.state.electiveCourses;
+    console.log("componentDidMount electiveCourses " + test.length);
   }
 
   selectedCourseHandler(course, isSelected) {
@@ -43,7 +45,7 @@ class ElectiveCourses extends Component {
   render() {
     let courses = this.state.electiveCourses;
 
-    if ( courses !== undefined && courses.length > 0 ) {
+    if (courses !== undefined && courses.length > 0) {
       return (
         <table
           style={{
@@ -53,8 +55,13 @@ class ElectiveCourses extends Component {
           }}
         >
           <thead>
-            <tr>
-              <th style={{ columnSpan: 6 }}>Elective Courses</th>
+            <tr style={{
+            height: "inherit",
+            border: "none",
+            overflow: "auto",
+            fontSize: "25px"
+          }}>
+              <th>Courses To Add</th>
             </tr>
           </thead>
           <tbody>
@@ -82,20 +89,27 @@ class ElectiveCourses extends Component {
           }}
         >
           <thead>
-            <tr>
-              <th style={{ columnSpan: 6 }}>Elective Courses</th>
-            </tr>
-          </thead>
-          <tbody>
             <tr style={{
             height: "inherit",
             border: "none",
             overflow: "auto",
-            textAlign: "center",
-            fontSize: "5vw",
-            color: "green"
+            fontSize: "25px"
           }}>
-              <td>No Elective Courses Needed</td>
+              <th>Courses To Add</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              style={{
+                height: "inherit",
+                border: "none",
+                overflow: "auto",
+                textAlign: "center",
+                fontSize: "3vw",
+                color: "green"
+              }}
+            >
+              <td>No Additional Courses Needed</td>
             </tr>
           </tbody>
         </table>

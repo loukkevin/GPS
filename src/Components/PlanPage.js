@@ -22,9 +22,20 @@ class PlanPage extends Component {
   }
 
   componentWillMount() {
-    this.setState({ requirements: this.props.requirements });
-    this.setState({ electiveCourses: this.props.electiveCourses });
-    this.getRequirementCourses();
+    // this.setState({ requirements: this.props.requirements });
+    // this.setState({ electiveCourses: this.props.electiveCourses });
+    //this.getRequirementCourses();
+    var requirements = this.props.requirements;
+    console.log("planPage requirements " + requirements[0].requiredCourse.name);
+    var courses = this.state.electiveCourses;
+    for (var i = 0; i < requirements.length; i++) {
+      courses.push({
+        name: requirements[i].requiredCourse.name,
+        key: requirements[i].requiredCourse.name
+      });
+      console.log(requirements[i].requiredCourse.name + " ");
+    }
+    this.setState({ electiveCourses: courses });
     this.handleSelectedCourse = this.handleSelectedCourse.bind(this);
     this.courseAdded = this.courseAdded.bind(this);
     this.courseAddedCallback = this.courseAddedCallback.bind(this);
@@ -32,11 +43,15 @@ class PlanPage extends Component {
   }
 
   getRequirementCourses() {
-    var requirements = [];
-    var requiredCourses = [];
+    var requirements = this.props.requirements;
+    console.log("planPage requirements " + requirements[0].requiredCourse.name);
+    var requiredCourses = this.state.electiveCourses;
     requirements = this.state.requirements;
     for (var i = 0; i < requirements.length; i++) {
-      requiredCourses.push(requirements[i].requiredCourse);
+      requiredCourses.push({
+        name: requirements[i].requiredCourse.name,
+        key: requirements[i].requiredCourse.name
+      });
       console.log(requirements[i].requiredCourse + " ");
     }
     this.setState({ requiredCourses: requiredCourses });
@@ -130,7 +145,7 @@ class PlanPage extends Component {
               <td style={electiveCoursesDivStyle}>
                 <ElectiveCourses
                   handleSelectedCourse={this.handleSelectedCourse}
-                  electiveCourses={this.state.requiredCourses}
+                  electiveCourses={this.state.electiveCourses}
                   courseAdded={this.state.courseAdded}
                   selectedCourseName={this.state.selectedCourseName}
                   courseAddedCallback={this.courseAddedCallback}
@@ -140,6 +155,18 @@ class PlanPage extends Component {
             </tr>
             <tr>
               <td style={planDivStyle}>
+                <span
+                  style={{
+                    textAlign: "center",
+                    fontSize: "40px",
+                    margin: "auto",
+                    height: "50px",
+                    border: "1px solid black",
+                    justifyContent: "center"
+                  }}
+                >
+                  Graduation Plan
+                </span>
                 <Plan
                   requiredCourses={this.state.requiredCourses}
                   handleSelectedCourse={this.handleSelectedCourse}
