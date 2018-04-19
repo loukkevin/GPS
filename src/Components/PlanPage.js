@@ -63,7 +63,14 @@ class PlanPage extends Component {
     return this.state.selectedCourseName;
   }
 
-  handleSelectedCourse(course, credits,description,prerequisites,semestersOffered,fromElectives) {
+  handleSelectedCourse(
+    course,
+    credits,
+    description,
+    prerequisites,
+    semestersOffered,
+    fromElectives
+  ) {
     this.setState({
       selectedCourseName: course,
       selectedCourseDescription: description,
@@ -86,7 +93,15 @@ class PlanPage extends Component {
   }
 
   courseAddedCallback() {
-    this.setState({ courseAdded: false });
+    this.setState({
+      courseAdded: false,
+      selectedCourseName: "",
+      selectedCourseDescription: "",
+      selectedCourseCredits: 0,
+      selectedCoursePrerequisites: [],
+      selectedCourseSemestersOffered: []
+
+    });
   }
 
   render() {
@@ -115,7 +130,7 @@ class PlanPage extends Component {
       scroll: "auto",
       border: "1px solid black",
       overflow: "auto",
-      textAlign: "center",
+      textAlign: "center"
     };
     const infoPanelStyle = {
       height: "inherit",
@@ -158,15 +173,13 @@ class PlanPage extends Component {
                   credits={this.state.selectedCourseCredits}
                   semestersOffered={this.state.selectedCourseSemestersOffered}
                   description={this.state.selectedCourseDescription}
-                  style={infoPanelStyle}
                   selected={this.state.courseIsSelected}
                 />
               </td>
             </tr>
             <tr>
               <td style={planDivStyle}>
-                  Graduation Plan
-
+                Graduation Plan
                 <Plan
                   requiredCourses={this.state.requiredCourses}
                   handleSelectedCourse={this.handleSelectedCourse}
@@ -176,7 +189,6 @@ class PlanPage extends Component {
                 />
               </td>
             </tr>
-
           </tbody>
         </table>
       </div>
