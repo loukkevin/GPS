@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Semester from "./Semester";
 //import ReactTable from "react-table";
 
 class InfoPanel extends Component {
@@ -35,7 +34,9 @@ class InfoPanel extends Component {
   }
 
   render() {
-    var style = this.props.style;
+    const style = {
+      width: "100%"
+    }
     var prerequisites = this.state.prerequisites;
     var semesters = [];
     semesters = this.state.semestersOffered;
@@ -43,22 +44,20 @@ class InfoPanel extends Component {
     var prerequisiteString = "";
     if (semesters !== undefined) {
       for (var i = 0; i < semesters.length; i++) {
-        if (i === 0){
+        if (i === 0) {
           semesterString = semesters[i];
-        }
-        else{
-        semesterString = semesterString + ", " + semesters[i];
+        } else {
+          semesterString = semesterString + ", " + semesters[i];
         }
         console.log(semesterString);
       }
     }
     if (prerequisites !== undefined) {
-      for (var i = 0; i < prerequisites.length; i++) {
-        if (i === 0){
+      for (i = 0; i < prerequisites.length; i++) {
+        if (i === 0) {
           prerequisiteString = prerequisites[i];
-        }
-        else{
-        prerequisiteString = prerequisiteString + ", " + prerequisites[i];
+        } else {
+          prerequisiteString = prerequisiteString + ", " + prerequisites[i];
         }
         console.log(prerequisiteString);
       }
@@ -66,32 +65,32 @@ class InfoPanel extends Component {
 
     if (this.state.selected) {
       return (
-        <table style={style}>
-          <tbody>
-            <tr>
-              <td>Name: {this.state.name}</td>
-            </tr>
-            <tr>
-              <td>Prerequisites: {prerequisiteString}</td>
-            </tr>
-            <tr>
-              <td>Credits: {this.state.credits}</td>
-            </tr>
-            <tr>
-              <td>Semesters Offered: {semesterString}</td>
-            </tr>
-            <tr>
-              <td>Description: {this.state.description}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div>
+          <table style={style}>
+            <tbody>
+              <tr>
+                <td>Name: {this.state.name}</td>
+                <td>Prerequisites: {prerequisiteString}</td>
+                <td>Semesters Offered: {semesterString}</td>
+                <td>Credits: {this.state.credits}</td>
+              </tr>
+            </tbody>
+          </table>
+          <table>
+            <tbody>
+              <tr>
+                <td>Description: {this.state.description}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       );
     } else {
       return (
         <table>
           <tbody>
             <tr>
-              <td>Remember to confirm your plan with your advisor</td>
+              <td>No Course Selected</td>
             </tr>
           </tbody>
         </table>

@@ -99,14 +99,6 @@ class Plan extends Component {
   }
 
   render() {
-    const tableStyle = {
-      height: "100%",
-      width: "100%",
-      overflow: "scroll",
-      display: "flex",
-      flexDirection: "row"
-    };
-
     let semesters = this.state.semesters;
     return (
       <table className="sturdy">

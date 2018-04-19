@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Course from "./Course";
 import Plan from "./Plan";
 import ElectiveCourses from "./ElectiveCourses";
 import InfoPanel from "./InfoPanel";
@@ -91,7 +90,6 @@ class PlanPage extends Component {
   }
 
   render() {
-    let requiredCourses = this.state.requiredCourses;
     const planPageStyle = {
       height: "inherit",
       width: "inherit",
@@ -104,12 +102,7 @@ class PlanPage extends Component {
       border: "1px solid black",
       margin: "auto"
     };
-    const lowerSectionDivStyle = {
-      height: "200px",
-      width: "100%",
-      border: "1px solid black",
-      overflow: "auto"
-    };
+
     const electiveCoursesDivStyle = {
       height: "20%",
       width: "12%",
@@ -121,7 +114,8 @@ class PlanPage extends Component {
       width: "88%",
       scroll: "auto",
       border: "1px solid black",
-      overflow: "auto"
+      overflow: "auto",
+      textAlign: "center",
     };
     const infoPanelStyle = {
       height: "inherit",
@@ -157,33 +151,6 @@ class PlanPage extends Component {
               </td>
             </tr>
             <tr>
-              <td style={planDivStyle}>
-                <span
-                  style={{
-                    textAlign: "center",
-                    fontSize: "40px",
-                    margin: "auto",
-                    height: "50px",
-                    border: "1px solid black",
-                    justifyContent: "center"
-                  }}
-                >
-                  Graduation Plan
-                </span>
-                <Plan
-                  requiredCourses={this.state.requiredCourses}
-                  handleSelectedCourse={this.handleSelectedCourse}
-                  courseIsSelected={this.state.courseIsSelected}
-                  selectedCourseName={this.state.selectedCourseName}
-                  courseAdded={this.courseAdded}
-                />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <table style={lowerSectionDivStyle}>
-          <tbody>
-            <tr>
               <td>
                 <InfoPanel
                   name={this.state.selectedCourseName}
@@ -195,9 +162,21 @@ class PlanPage extends Component {
                   selected={this.state.courseIsSelected}
                 />
               </td>
-
-              <td style={optionPanelStyle}>OPTIONS PANEL</td>
             </tr>
+            <tr>
+              <td style={planDivStyle}>
+                  Graduation Plan
+
+                <Plan
+                  requiredCourses={this.state.requiredCourses}
+                  handleSelectedCourse={this.handleSelectedCourse}
+                  courseIsSelected={this.state.courseIsSelected}
+                  selectedCourseName={this.state.selectedCourseName}
+                  courseAdded={this.courseAdded}
+                />
+              </td>
+            </tr>
+
           </tbody>
         </table>
       </div>

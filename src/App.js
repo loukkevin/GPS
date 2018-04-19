@@ -33,7 +33,6 @@ class App extends Component {
       if (courses === undefined) {
         courses = [];
       }
-      let courseName = course;
       console.log("courses -->" + courses + "<-- courses");
       courses.push({
         name: course,
@@ -42,7 +41,6 @@ class App extends Component {
       console.log("after push attempt: courses -->" + courses + "<-- courses");
       this.setState({ coursesSelected: courses });
     } else {
-      console.log("courseName " + courseName);
       var courses = this.state.coursesSelected;
       var courseName = "";
       for (var index = 0; index < courses.length; index++) {
