@@ -10,7 +10,8 @@ class Semester extends Component {
       name: this.props.name,
       credits: 0,
       courses: [],
-      selectedCourseName: this.props.selectedCourseName
+      selectedCourseName: this.props.selectedCourseName,
+      selectedCourseCredits: this.props.selectedCourseCredits
     };
     this.selectCourseHandler = this.selectCourseHandler.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -28,7 +29,7 @@ class Semester extends Component {
       console.log("calculating credits, course: " + courses[i].name);
       calcCredits = calcCredits + courses[i].credits;
     }
-    this.setState({ credits: this.state.credits + calcCredits });
+    this.setState({ credits: calcCredits });
   }
 
   selectCourseHandler(course, isSelected) {
@@ -48,40 +49,40 @@ class Semester extends Component {
       let courses = this.state.courses;
       let courseName = this.state.selectedCourseName;
       console.log("courseName " + courseName);
-      courses.push({ name: this.state.selectedCourseName, key: this.state.selectedCourseName });
+      courses.push({ name: this.state.selectedCourseName, key: this.state.selectedCourseName, credits:this.props.selectedCourseCredits });
       this.setState({ courses: courses });
-      let courseCredits = 0;
-      let api = "https://scsu-gps-server.herokuapp.com/getCourseInformation?name= ";//"http://localhost:8080/getCourseInformation?name="
-    fetch(api + this.state.selectedCourseName)
-      .then(response => {
-        return response.json();
-      })
-      .then(json => {
-          courseCredits = json.credits;
-          let totalCredits = this.state.credits + courseCredits;
-          console.log(totalCredits);
-          this.setState({credits: totalCredits});
-      });
+    //   let courseCredits = 0;
+    //   let api = "https://scsu-gps-server.herokuapp.com/getCourseInformation?name= ";//"http://localhost:8080/getCourseInformation?name="
+    // fetch(api + this.state.selectedCourseName)
+    //   .then(response => {
+    //     return response.json();
+    //   })
+    //   .then(json => {
+    //       courseCredits = json.credits;
+    //       let totalCredits = this.state.credits + courseCredits;
+    //       console.log(totalCredits);
+    //       this.setState({credits: totalCredits});
+    //   });
 
-      //this.calculateCredits();
+      this.calculateCredits();
       this.props.courseAdded();
     }
   }
 
   componentDidUpdate() {
     this.updateState();
-    console.log("semester component will receive props" + this.props.selectedCourseName);
+    //console.log("semester component will receive props" + this.props.selectedCourseName);
   }
 
   updateState() {
     if (this.props.selectedCourseName === this.state.selectedCourseName) {
-      console.log(" semester updateState()");
+      //console.log(" semester updateState()");
     } else {
       this.setState({
         selectedCourseName: this.props.selectedCourseName,
       });
     }
-    console.log("semester.js state.name " +this.state.name);
+    //  console.log("semester.js state.name " +this.state.name);
   }
 
   render() {

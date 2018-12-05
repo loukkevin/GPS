@@ -65,7 +65,8 @@ class Plan extends Component {
       ],
       requirements: [],
       electiveCourses: [],
-      selectedCourseName: this.props.selectedCourseName
+      selectedCourseName: this.props.selectedCourseName,
+      selectedCourseCredits: this.props.selectedCourseCredits
     };
     this.selectedCourseHandler = this.selectedCourseHandler.bind(this);
     this.courseAdded = this.courseAdded.bind(this);
@@ -74,7 +75,7 @@ class Plan extends Component {
 
   selectedCourseHandler(course, isSelected) {
     var fromElectives = false;
-    console.log("in planCourse handler" + course.state.name);
+    //console.log("in planCourse handler" + course.state.name);
     this.props.handleSelectedCourse(course, fromElectives);
   }
 
@@ -84,18 +85,19 @@ class Plan extends Component {
 
   componentDidUpdate() {
     this.updateState();
-    console.log("infopanel component will receive props" + this.props.name);
+    //console.log("infopanel component will receive props" + this.props.name);
   }
 
   updateState() {
     if (this.props.selectedCourseName === this.state.selectedCourseName) {
-      console.log(" plan updateState()");
+      //console.log(" plan updateState()");
     } else {
       this.setState({
         selectedCourseName: this.props.selectedCourseName,
+        selectedCourseCredits: this.props.selectedCourseCredits
       });
     }
-    console.log("plan.js state.name " +this.state.selectedCourseName);
+    console.log("plan.js name= " +this.state.selectedCourseName + "credits="+ this.state.selectedCourseCredits);
   }
 
   render() {
@@ -120,6 +122,7 @@ class Plan extends Component {
               selectedCourseHandler={this.selectedCourseHandler}
               courseIsSelected={this.props.courseIsSelected}
               selectedCourseName={this.state.selectedCourseName}
+              selectedCourseCredits={this.state.selectedCourseCredits}
               courseAdded={this.courseAdded}
             />
           ))}

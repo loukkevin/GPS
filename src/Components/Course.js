@@ -5,10 +5,10 @@ class Course extends Component {
     super(props);
     this.state = {
       name: this.props.name,
-      prerequisites: [],
-      credits: 0,
-      description: this.props.name,
-      semestersOffered: [],
+      prerequisites: this.props.prerequisites,
+      credits: this.props.credits,
+      description: this.props.description,
+      semestersOffered: this.props.semestersOffered,
       isToggleOn: false
     };
 
@@ -17,6 +17,7 @@ class Course extends Component {
   }
 
   componentWillMount() {
+    if (this.props.name === this.props.description){
     let api = "https://scsu-gps-server.herokuapp.com/getCourseInformation?name= "; //"http://localhost:8080/getCourseInformation?name="; //
     fetch(api + this.state.name)
       .then(response => {
@@ -30,6 +31,8 @@ class Course extends Component {
           semestersOffered: json.semestersOffered
         });
       });
+    }
+    console.log(this.state);
   }
 
   componentWillReceiveProps(props) {

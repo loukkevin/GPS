@@ -14,14 +14,14 @@ class ElectiveCourses extends Component {
 
   componentDidMount() {
     this.setState({ electiveCourses: this.props.electiveCourses });
-    var test = this.state.electiveCourses;
+    var test = this.props.electiveCourses;
     console.log("componentDidMount electiveCourses " + test.length);
   }
 
   selectedCourseHandler(course, credits,description,prerequisites,semestersOffered, isSelected) {
     var fromElectives = true;
-    console.log("in electiveCourses handler" + course);
-    this.props.handleSelectedCourse(course, credits,description,prerequisites,semestersOffered, fromElectives);
+    console.log("in electiveCourses handler" + course + "credits=" + credits);
+    this.props.handleSelectedCourse(course,credits,description,prerequisites,semestersOffered, fromElectives);
   }
 
   componentWillReceiveProps(props) {
@@ -71,6 +71,10 @@ class ElectiveCourses extends Component {
                   selectCourseHandler={this.selectedCourseHandler}
                   key={course.name}
                   name={course.name}
+                  credits={course.credits}
+                  description={course.description}
+                  prerequisites={course.prerequisites}
+                  semestersOffered={course.semestersOffered}
                   courseAdded={this.state.courseAdded}
                   fulfilled={this.props.courseIsSelected}
                 />

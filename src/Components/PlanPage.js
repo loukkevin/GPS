@@ -25,14 +25,18 @@ class PlanPage extends Component {
     // this.setState({ electiveCourses: this.props.electiveCourses });
     //this.getRequirementCourses();
     var requirements = this.props.requirements;
-    console.log("planPage requirements " + this.props.electiveCourses[0].name);
+    console.log("planPage requirements " + this.props.electiveCourses );
     let courses = [];
     courses = this.props.electiveCourses;
     console.log("courses length " + courses.length);
     for (var i = 0; i < requirements.length; i++) {
       courses.push({
         name: requirements[i].requiredCourse.name,
-        key: requirements[i].requiredCourse.name
+        key: requirements[i].requiredCourse.name,
+        credits: requirements[i].requiredCourse.credits,
+        prerequisites: requirements[i].requiredCourse.prerequisites,
+        description: requirements[i].requiredCourse.description,
+        semestersOffered: requirements[i].requiredCourse.semestersOffered
       });
       console.log(requirements[i].requiredCourse.name + " ");
     }
@@ -52,7 +56,8 @@ class PlanPage extends Component {
     for (var i = 0; i < requirements.length; i++) {
       requiredCourses.push({
         name: requirements[i].requiredCourse.name,
-        key: requirements[i].requiredCourse.name
+        key: requirements[i].requiredCourse.name,
+
       });
       console.log(requirements[i].requiredCourse + " ");
     }
@@ -71,6 +76,7 @@ class PlanPage extends Component {
     semestersOffered,
     fromElectives
   ) {
+    console.log("selected course name=" + course + " selected course credits=" + credits)
     this.setState({
       selectedCourseName: course,
       selectedCourseDescription: description,
@@ -185,6 +191,7 @@ class PlanPage extends Component {
                   handleSelectedCourse={this.handleSelectedCourse}
                   courseIsSelected={this.state.courseIsSelected}
                   selectedCourseName={this.state.selectedCourseName}
+                  selectedCourseCredits={this.state.selectedCourseCredits}
                   courseAdded={this.courseAdded}
                 />
               </td>

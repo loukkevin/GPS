@@ -24,22 +24,26 @@ class Elective extends Component {
     };
   }
 
-  selectCourseHandler(course, credits,description,prerequisites,semestersOffered, selected) {
+  selectCourseHandler(course, credits1,description1,prerequisites1,semestersOffered1, selected) {
     console.log("in Handler, selected " + selected);
     this.props.updateCourses(course,selected);
     if (this.state.electiveType === "credit") {
       if (selected) {
-        this.setState({ numSelected: this.state.numSelected - credits });
+        this.setState({ numSelected: this.state.numSelected - credits1 });
         let courses = this.state.coursesSelected;
         let courseName = course;
         console.log("courseName " + courseName);
         courses.push({
           name: course,
-          key: course
+          key: course,
+          description: description1,
+          credits: credits1,
+          prerequisites: prerequisites1,
+          semestersOffered: semestersOffered1
         });
         this.setState({ coursesSelected: courses });
       } else {
-        this.setState({ numSelected: this.state.numSelected + credits });
+        this.setState({ numSelected: this.state.numSelected + credits1 });
         var courses = this.state.coursesSelected;
         var courseName = "";
         for (var index = 0; index < courses.length; index++) {
@@ -58,7 +62,11 @@ class Elective extends Component {
         console.log("courseName " + courseName);
         courses.push({
           name: course,
-          key: course
+          key: course,
+          description: description1,
+          credits: credits1,
+          prerequisites: prerequisites1,
+          semestersOffered: semestersOffered1
         });
         this.setState({ coursesSelected: courses });
       } else {
@@ -130,6 +138,7 @@ class Elective extends Component {
                     prerequisites={course.prerequisites}
                     credits={course.credits}
                     description={course.description}
+                    semestersOffered={course.semestersOffered}
                     status="unselected"
                   />
                 ))}
@@ -163,6 +172,7 @@ class Elective extends Component {
                       prerequisites={course.prerequisites}
                       credits={course.credits}
                       description={course.description}
+                      semestersOffered = {course.semestersOffered}
                       status="unselected"
                     />
                 ))}
